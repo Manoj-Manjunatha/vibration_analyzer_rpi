@@ -121,7 +121,9 @@ def main():
     # Call the init function to initialze.
     device_name = input('Enter device name \n')
     time_to_record = input('Enter time to record in seconds \n')
-    if not time_to_record:
+    if time_to_record:
+        time_to_record = int(time_to_record)
+    else:
         time_to_record = 10         # time to record data in seconds
 
     bus = smbus.SMBus(1)
