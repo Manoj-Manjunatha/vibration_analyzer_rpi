@@ -117,14 +117,15 @@ def print_data(bus, device_address):
 def main():
 
     # Call the init function to initialze.
+    time_to_record = 10         # time to record data in seconds
     bus = smbus.SMBus(1)
-    device_address = 0x68   # This is the I2C address [0110 1000]
+    device_address = 0x68       # This is the I2C address [0110 1000]
     print("Initializing MPU6050. \n")
     mpu_init(bus, device_address)
 
     print("Reading data from Gyro and Accelerometer - ")
-    end_datetime = datetime.now() + timedelta(seconds=5)
-    filename = 'accelerometer_data_{}.txt'.format(end_datetime.timestamp())
+    end_datetime = datetime.now() + timedelta(seconds=time_to_record)
+    filename = 'accelerometer_data_{}_{}.txt'.format(time_to_record, end_datetime.timestamp())
     print("Data logging started - ", datetime.now())
     with open(filename, 'w+') as f:
         while datetime.now() < end_datetime:
