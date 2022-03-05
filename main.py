@@ -141,7 +141,7 @@ def main():
     with open(filename, 'w+') as f:
         while datetime.now() < end_datetime:
             x,y,z = get_accelerometer_data(bus, device_address)
-            f.write('{},{},{},{} \n'.format(datetime.now(), x, y, z))
+            f.write('{},{},{},{}\n'.format(datetime.now(), x, y, z))
 
     print("Data logging complete - ", datetime.now())
     print("File saved as - ", filename)
