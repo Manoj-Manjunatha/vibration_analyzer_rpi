@@ -125,7 +125,7 @@ def main():
 
     print("Reading data from Gyro and Accelerometer - ")
     end_datetime = datetime.now() + timedelta(seconds=time_to_record)
-    filename = 'accelerometer_data_{}_{}.txt'.format(time_to_record, end_datetime.timestamp())
+    filename = 'accelerometer_data_{}s_{}.txt'.format(time_to_record, end_datetime.timestamp())
     print("Data logging started - ", datetime.now())
     with open(filename, 'w+') as f:
         while datetime.now() < end_datetime:
