@@ -49,6 +49,8 @@ def mpu_init(bus, device_address):
     # Write to interrupt-enable-register.
     # bus.write_byte_data(device_address, INT_ENABLE, 1)
 
+    sleep(0.5)
+
 
 def read_raw_data(bus, device_address, sensor_address):
     """Get the raw data from the MPU and return it."""
@@ -117,6 +119,7 @@ def print_data(bus, device_address):
 def main():
 
     # Call the init function to initialze.
+    device_name = input('Enter device name \n')
     time_to_record = 10         # time to record data in seconds
     bus = smbus.SMBus(1)
     device_address = 0x68       # This is the I2C address [0110 1000]
@@ -126,7 +129,10 @@ def main():
     print("Reading data from Gyro and Accelerometer - ")
     end_datetime = datetime.now() + timedelta(seconds=time_to_record)
     filename = 'accelerometer_data_{}s_{}.txt'.format(time_to_record, end_datetime.timestamp())
+    if device_name:
+        filename = '{}_{}'.format(device_name, filename)
     print("Data logging started - ", datetime.now())
+
     with open(filename, 'w+') as f:
         while datetime.now() < end_datetime:
             f.write('{} -- {} \n'.format(datetime.now(), get_accelerometer_data(bus, device_address)))
@@ -137,4 +143,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
